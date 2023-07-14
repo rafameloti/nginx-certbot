@@ -1,0 +1,19 @@
+FROM certbot/certbot:latest
+
+# Instalar as dependências necessárias para o plugin NGINX
+# RUN apk add --no-cache libffi-dev openssl-dev gcc musl-dev python3-dev py3-pip
+
+# Instalar os binários necessários para o plugin NGINX
+RUN apk update && apk add nginx && rm -rf /var/cache/apk/*
+
+# Instalar o plugin NGINX do Certbot
+RUN pip3 install certbot-nginx
+# RUN pip3 install pip --upgrade
+# RUN pip install certbot-nginx
+# RUN apk add certbot-nginx
+# RUN apk update && apk add nginx
+
+# Configurar o entrypoint padrão para usar certbot 
+# com o plugin nginx 
+ENTRYPOINT ["certbot"]
+CMD ["--nginx"]

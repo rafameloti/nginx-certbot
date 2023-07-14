@@ -1,0 +1,45 @@
+version: '3'
+
+networks:
+  vnet-nginx:
+
+services:
+  nginx:
+    #image: nginx
+    build: .
+    container_name: nginx-01
+    hostname: nginx-01
+    restart: always
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./data/conf.d:/etc/nginx/conf.d # arquivo de configuração do site nginx
+      - ./data/letsencrypt:/etc/letsencrypt # Certificado real link simbólico
+      - ./data/certbot/challenge:/var/www/html  # Desafio de validade/renovação do certificado
+      #- ./data/certbot/var/lib/letsencrypt:/var/lib/letsencrypt # Certificado real
+      #- ./data/letsencrypt:/etc/nginx/certs
+    networks:
+      - vnet-nginx
+
+  certbot:
+    #image: certbot/certbot
+    build: 
+      context: .
+      dockerfile: Dockerfile-certbot
+    depends_on:
+      - nginx
+    container_name: certbot-01
+    hostname: certbot-01
+    command: --staging -d app1.softvision.com.br --email uziel@simplificou.com --agree-tos --no-eff-email --force-renewal
+    # command: certonly --staging -d app1.softvision.com.br --email uziel@simplificou.com --agree-tos --no-eff-email --force-renewal
+    # command: certonly --webroot --webroot-path=/var/www/html --email seu_email@example.com --agree-tos --no-eff-email --force-renewal -d site1.com -d site2.com -d site3.com
+    volumes:
+      - ./data/letsencrypt:/etc/letsencrypt # Certificado real link simbólico
+      - ./data/certbot/challenge:/var/www/html  # Desafio de validade/renovação do certificado
+    networks:
+      - vnet-nginx
+
+
+
+    
