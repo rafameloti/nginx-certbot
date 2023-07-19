@@ -35,7 +35,7 @@ services:
       - nginx
     container_name: certbot-01
     hostname: certbot-01
-    command: certonly --webroot --webroot-path=/var/www/certbot --email uziel@simplificou.com --agree-tos --no-eff-email --force-renewal -d app1.simplificou -d app2.simplificou # funcionou
+    command: certonly --webroot --webroot-path=/var/www/certbot --email uziel@simplificou.com --agree-tos --no-eff-email --force-renewal -d app1.simplificou.com -d app2.simplificou.com # funcionou
     # command: -d app1.simplificou.com -d app2.simplificou --email uziel@simplificou.com --agree-tos --no-eff-email --force-renewal
     # command: certonly --staging --webroot --webroot-path=/var/www/certbot --email uziel@simplificou.com --agree-tos --no-eff-email --force-renewal -d app1.simplificou -d app2.simplificou # funcionou
     # command: --staging -d app1.simplificou.com -d nginx.simplificou.com --email uziel@simplificou.com --agree-tos --no-eff-email --force-renewal
