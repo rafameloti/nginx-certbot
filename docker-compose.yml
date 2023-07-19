@@ -36,11 +36,12 @@ services:
       - nginx
     container_name: certbot-01
     hostname: certbot-01
-    # command: certonly --webroot --webroot-path=/var/www/certbot --email uziel@simplificou.com --agree-tos --no-eff-email --force-renewal -d app1.simplificou.com # funciona um site por vez manual
-    # command: -d app1.simplificou.com -d app2.simplificou.com --email uziel@simplificou.com --agree-tos --no-eff-email --force-renewal # configura todos sites automaticamente
+    # command: certonly --webroot --webroot-path=/var/www/certbot --email uziel@simplificou.com --agree-tos --no-eff-email --force-renewal -d graficabluebox.com.softvision.com.br # funciona um site por vez manual
+    # command: --nginx -d app1.simplificou.com -d app2.simplificou.com --email uziel@simplificou.com --agree-tos --no-eff-email --force-renewal # configura todos sites automaticamente
     # command: certonly --staging --webroot --webroot-path=/var/www/certbot --email uziel@simplificou.com --agree-tos --no-eff-email --force-renewal -d app1.simplificou.com
     # command: --staging -d app1.simplificou.com -d app2.simplificou.com --email uziel@simplificou.com --agree-tos --no-eff-email --force-renewal
     # entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+    # entrypoint: /bin/sh -c 'trap exit TERM; certbot certonly --webroot --webroot-path=/var/www/certbot --email uziel@simplificou.com --agree-tos --no-eff-email --force-renewal -d graficabluebox.com.softvision.com.br; while :; do certbot renew; sleep 60s; done;'
     entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
     volumes:
       - ./data/nginx/http.d:/etc/nginx/http.d # arquivo de configuração do site nginx

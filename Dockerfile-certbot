@@ -16,5 +16,5 @@ RUN pip3 install certbot-nginx
 # Configurar o entrypoint padrão para usar certbot 
 # com o plugin nginx 
 #ENTRYPOINT ["certbot"]
-ENTRYPOINT ["/bin/sh", "-c", "trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;"]
-CMD ["--nginx"]
+#ENTRYPOINT ["/bin/sh", "-c", "trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;"]
+#CMD ["--nginx"]
