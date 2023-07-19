@@ -5,8 +5,15 @@ RUN     apt-get update \
         wget vim iputils-ping \
 	 && rm -rf /var/lib/apt/lists \
 	 && rm -rf /var/cache/apt
+RUN rm /etc/nginx/conf.d/default.conf
+RUN rm /etc/nginx/nginx.conf
+##############################################################
+#####  Copiar arquivos .conf do nginx                    #####
+COPY ./data/nginx/nginx.conf /etc/nginx/nginx.conf
+COPY ./data/nginx/http.d/app1.conf /etc/nginx/http.d/app1.conf
+COPY ./data/nginx/http.d/app2.conf /etc/nginx/http.d/app2.conf
+##############################################################
+#####  Copiar arquivos html do nginx                     #####
 COPY ./data/html/index.html /usr/share/nginx/html/index.html
 COPY ./data/html/main.css /usr/share/nginx/html/main.css
-RUN rm /etc/nginx/conf.d/default.conf
-#COPY conf/default.conf /etc/nginx/conf.d/default.conf
-COPY ./data/conf.d/site-01.conf /etc/nginx/conf.d/site-01.conf
+##############################################################
