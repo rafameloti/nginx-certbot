@@ -38,9 +38,9 @@ services:
     hostname: certbot-01
     # command: certonly --webroot --webroot-path=/var/www/certbot --email rafael.melo@softvision.com.br --agree-tos --no-eff-email --force-renewal -d vauter.simplificou.com # funciona um site por vez manual
     # command: --nginx -d vauter.simplificou.com --email rafael.melo@softvision.com.br --agree-tos --no-eff-email --force-renewal # configura todos sites automaticamente
-    # command: certonly --staging --webroot --webroot-path=/var/www/certbot --email rafael.melo@softvision.com.br --agree-tos --no-eff-email --force-renewal -d app1.simplificou.com
-    # command: --staging -d app1.simplificou.com -d app2.simplificou.com --email rafael.melo@softvision.com.br --agree-tos --no-eff-email --force-renewal
-    # entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+    # command: certonly --staging --webroot --webroot-path=/var/www/certbot --email rafael.melo@softvision.com.br --agree-tos --no-eff-email --force-renewal -d app1.simplificou.com # somente para testes
+    # command: --staging -d app1.simplificou.com -d app2.simplificou.com --email rafael.melo@softvision.com.br --agree-tos --no-eff-email --force-renewal # somente para testes
+    # entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'" # somente para testes
     # entrypoint: /bin/sh -c 'trap exit TERM; certbot certonly --webroot --webroot-path=/var/www/certbot --email rafael.melo@softvision.com.br --agree-tos --no-eff-email --force-renewal -d graficabluebox.com.softvision.com.br; while :; do certbot renew; sleep 60s; done;'
     entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
     volumes:
